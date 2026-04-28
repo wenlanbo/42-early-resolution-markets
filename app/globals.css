@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@theme inline {
+  --color-brand: #de8bf3;
+  --color-brand2: #7b4081;
+  --color-brand3: #e6cde9;
+  --color-brand-base: #1c1520;
+
+  --color-text-brand: #d745ff;
+  --color-text-primary: #f9f9f9;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+
+  --color-border-dark: #282828;
+  --color-card-dark: #1d1a1d;
+  --color-surface-elevated: #120917;
+  --color-surface-input: #1e1e1e;
+  --color-surface-chip: #1f1b29;
+
+  --color-red: #fc0a52;
+  --color-green: #2e9f4a;
+  --color-green3: #6fd26f;
+  --color-green4: #89e389;
+  --color-info: #6d8bff;
+  --color-warning: #ff9500;
+  --color-live-dot: #0fb241;
+
+  --shadow-live-dot-glow: 0 0 10px rgb(15 178 65 / 0.75);
+
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 6px);
+  --radius-3xl: calc(var(--radius) + 12px);
+}
+
+@layer base {
+  * {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+  html,
+  body {
+    background-color: var(--color-brand-base);
+    color: var(--color-text-primary);
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes live-dot-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(0.85);
+    }
+  }
+  .animate-live-dot {
+    animation: live-dot-pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes market-card-enter {
+    from {
+      opacity: 0;
+      transform: translate3d(28px, 12px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .animate-market-card-in {
+    animation: market-card-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--stagger-index, 0) * 50ms);
+  }
+
+  @keyframes modal-backdrop-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .animate-modal-backdrop {
+    animation: modal-backdrop-in 180ms ease-out both;
+  }
+
+  @keyframes modal-content-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 12px, 0) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+  .animate-modal-content {
+    animation: modal-content-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-live-dot,
+    .animate-market-card-in,
+    .animate-modal-backdrop,
+    .animate-modal-content {
+      animation: none !important;
+    }
+  }
+}
