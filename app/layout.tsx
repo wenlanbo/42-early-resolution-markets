@@ -1,10 +1,31 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
+const TITLE = 'Early Resolution Markets on 42'
+const DESCRIPTION =
+  'Browse 42.space prediction markets tagged for early resolution. Multi-outcome markets that can resolve before their end date.'
+
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000'
+
 export const metadata: Metadata = {
-  title: 'Early Resolution Markets on 42',
-  description:
-    'Browse 42.space prediction markets tagged for early resolution. Multi-outcome markets that can resolve before their end date.',
+  metadataBase: new URL(siteUrl),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    type: 'website',
+    siteName: TITLE,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 }
 
 export default function RootLayout({
